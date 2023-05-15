@@ -2,7 +2,29 @@ red=$'\e[1;31m'
 green=$'\e[1;32m'
 blue=$'\e[1;34m'
 
+if [ ! -d "input" ];
+then
+    echo "$red --------------------------------------"
+    echo "$red You are missing the 'input' directory!"
+    echo "$red --------------------------------------"
+    exit 0
+fi
 
+if [ ! -d "target" ];
+then
+    echo "$red --------------------------------------"
+    echo "$red You are missing the 'target' directory!"
+    echo "$red --------------------------------------"
+    exit 0
+fi
+
+if [ ! -d "output" ];
+then
+    echo "$red --------------------------------------"
+    echo "$red You are missing the 'output' directory!"
+    echo "$red --------------------------------------"
+    exit 0
+fi
 
 
 current_dir=$(dirname "$0")               #CURRENT DIRECTORY
