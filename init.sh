@@ -2,11 +2,13 @@ red=$'\e[1;31m'
 green=$'\e[1;32m'
 blue=$'\e[1;34m'
 
-if [ ! -d "input" ];
+
+if [ ! -d "input" ];                                            #CHECK IF THE /input, /target, and /output DIRECTORIES EXIST
 then
     echo "$red --------------------------------------"
     echo "$red You are missing the 'input' directory!"
     echo "$red --------------------------------------"
+    echo $'\e[1;0m'
     exit 0
 fi
 
@@ -15,6 +17,7 @@ then
     echo "$red --------------------------------------"
     echo "$red You are missing the 'target' directory!"
     echo "$red --------------------------------------"
+    echo $'\e[1;0m'
     exit 0
 fi
 
@@ -23,6 +26,16 @@ then
     echo "$red --------------------------------------"
     echo "$red You are missing the 'output' directory!"
     echo "$red --------------------------------------"
+    echo $'\e[1;0m'
+    exit 0
+fi
+
+if [ ! -f "./target/target.pdf" ];                                                  #CHECK IF target.pdf FILE EXISTS
+then
+    echo "$red ---------------------------------------------------------------"
+    echo "$red You are missing the 'target.pdf' file in the 'output'directory!"
+    echo "$red ---------------------------------------------------------------"
+    echo $'\e[1;0m'
     exit 0
 fi
 
@@ -38,6 +51,7 @@ then
     echo "$red ---------------------------"
     echo "$red No spaces in input filname!"
     echo "$red ---------------------------"
+    echo $'\e[1;0m'
     exit 0
 fi
 
@@ -49,6 +63,7 @@ then
     echo "$red -----------------------------------------------------"
     echo "$red xtra-notes currently only supports 1 file at a time."
     echo "$red -----------------------------------------------------"
+    echo $'\e[1;0m'
     exit 0
 fi
 pages=$(pdfinfo ${filename}  | awk "/^Pages:/ {print $4}" | sed s/"Pages: "//)  #CREATE VARIABLE WITH NUMBER OF PAGES IN FILE
