@@ -7,6 +7,7 @@ In this video he showcases his way of taking notes in which he marks up lecture 
 by allowing users to add whatever they want after each slide/page, whether that be a blank page, lined paper, flowcharts, etc.
 
 REQUIRES PDFtk TO WORK. DOWNLOAD IT HERE: https://www.pdflabs.com/tools/pdftk-server/
+
 DO NOT MOVE ANY DIRECTORIES FROM THE MAIN DIRECTORY AND ONLY RUN THE SCRIPT WITHIN THE MAIN DIRECTORY
 
 Instructions:
