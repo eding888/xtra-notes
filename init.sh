@@ -2,7 +2,6 @@ current_dir=$(dirname "$0")               #CURRENT DIRECTORY
 input_dir=${current_dir}/input            #STORE DIRECTORY OF /input FOLDER
 filename=$(basename ${input_dir}/*.pdf)   #GET THE FILENAME OF PDF IN /input FOLDER
 
-
 if [[ $filename = *" "* ]];               #CHECK TO SEE IF THERE IS A SPACE IN THE INPUT FILENAME
 then
     echo "---------------------------"
@@ -21,6 +20,26 @@ then
     exit 0
 fi
 pages=$(pdfinfo ${filename}  | awk "/^Pages:/ {print $4}" | sed s/"Pages: "//)  #CREATE VARIABLE WITH NUMBER OF PAGES IN FILE
-for i in pages 
+
+cd .. 
+
+for i in $(seq $pages); 
 do
+    pdftk ./input/$filename cat $i output "$i.pdf"
+    if [[ $i -eq 1 ]];
+    then
+        pdftk "$i.pdf" ./target/"target.pdf" cat output "latest.pdf"
+    else
+        mv latest.pdf previous.pdf
+        pdftk "previous.pdf" "$i.pdf" cat output "latest.pdf"
+        rm previous.pdf
+        mv latest.pdf previous.pdf
+        pdftk "previous.pdf" ./target/"target.pdf" cat output "latest.pdf"
+        rm previous.pdf
+    fi
+    rm $i.pdf
 done
+
+newname=$(echo $filename | sed s/".pdf"//)
+mv latest.pdf "$newname-xtra.pdf"
+mv "$newname-xtra.pdf" ./output
